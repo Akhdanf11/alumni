@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 22, 2022 at 07:55 AM
+-- Generation Time: Jan 05, 2023 at 09:48 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -529,22 +529,12 @@ CREATE TABLE IF NOT EXISTS `ec_datalumni` (
   `dis_id` int(11) NOT NULL,
   `city_id` int(11) NOT NULL,
   `prov_id` int(11) NOT NULL,
+  `id_perusahaan` int(11) NOT NULL,
+  `id_skill` int(11) NOT NULL,
+  `id_contact` int(11) NOT NULL,
   `data_nama` varchar(255) NOT NULL,
   PRIMARY KEY (`data_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ec_datalumni`
---
-
-INSERT INTO `ec_datalumni` (`data_id`, `subdis_id`, `dis_id`, `city_id`, `prov_id`, `data_nama`) VALUES
-(1, 1, 1, 1, 1, 'Akhdan Fadhilah'),
-(2, 2, 2, 2, 1, 'Alexander yuanata'),
-(3, 3, 3, 3, 1, 'Safrizal'),
-(4, 8602, 440, 52, 2, 'Muhammad Fauzy Harahap'),
-(5, 25136, 1916, 155, 11, 'Dita Angreani'),
-(6, 43324, 3769, 221, 15, 'Reggy Aritonang'),
-(7, 50, 39, 16, 1, 'asd');
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -59615,6 +59605,88 @@ INSERT INTO `ec_subdistricts` (`subdis_id`, `subdis_name`, `dis_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_aplikasi`
+--
+
+DROP TABLE IF EXISTS `tb_aplikasi`;
+CREATE TABLE IF NOT EXISTS `tb_aplikasi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) NOT NULL,
+  `tahun_dibuat` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_aplikasi`
+--
+
+INSERT INTO `tb_aplikasi` (`id`, `nama`, `tahun_dibuat`) VALUES
+(1, 'E-Alumni S-1 Ilmu Komputer', '2022-11-14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_contact`
+--
+
+DROP TABLE IF EXISTS `tb_contact`;
+CREATE TABLE IF NOT EXISTS `tb_contact` (
+  `id_contact` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `no_telp` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_perusahaan`
+--
+
+DROP TABLE IF EXISTS `tb_perusahaan`;
+CREATE TABLE IF NOT EXISTS `tb_perusahaan` (
+  `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_skill` int(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jenis_perusahaan` enum('swasta','negeri') NOT NULL,
+  PRIMARY KEY (`id_perusahaan`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_perusahaan`
+--
+
+INSERT INTO `tb_perusahaan` (`id_perusahaan`, `id_skill`, `nama`, `jenis_perusahaan`) VALUES
+(1, 5, 'Dominico', 'negeri'),
+(6, 7, 'Dhou', 'negeri'),
+(7, 1, 'Web Dev', 'swasta');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_skill`
+--
+
+DROP TABLE IF EXISTS `tb_skill`;
+CREATE TABLE IF NOT EXISTS `tb_skill` (
+  `id_skill` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_skill` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_skill`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_skill`
+--
+
+INSERT INTO `tb_skill` (`id_skill`, `nama_skill`) VALUES
+(1, 'Computer'),
+(7, 'Marketing'),
+(3, 'Design'),
+(4, 'Writing'),
+(5, 'Data Analytic');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_users`
 --
 
@@ -59624,15 +59696,18 @@ CREATE TABLE IF NOT EXISTS `tb_users` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `role_user` enum('Pegawai','Admin') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_users`
 --
 
-INSERT INTO `tb_users` (`id`, `username`, `email`, `password`) VALUES
-(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `tb_users` (`id`, `username`, `email`, `password`, `role_user`) VALUES
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin'),
+(2, 'Akhdan Fadhilah', 'akhdan@gmail.com', 'c0072b7eb4ee6344e87b5c11f438c8e6', 'Pegawai'),
+(3, 'triojago', 'triojagooo@gmail.com', '7fa7edeb5c412d52897dc8d7d8f2e28b', 'Admin');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
