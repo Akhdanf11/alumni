@@ -116,6 +116,7 @@
 		case 'delete':
 			$id = $_POST['id'];
 			$insertData = mysqli_query($connection, "DELETE FROM `ec_datalumni` WHERE `ec_datalumni`.`data_id` = $id") or die ('Query Gagal');
+			$deleteData = mysqli_query($connection, "DELETE FROM `tb_contact` WHERE `tb_contact`.`id_contact` = $id") or die ('Query Gagal');
 			exit;
 		break;
 

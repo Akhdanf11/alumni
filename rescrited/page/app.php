@@ -29,8 +29,8 @@ if (isset($_POST['submit'])) {
   include 'nav.php';
  ?>
 
-<main role="main" class="col-md-9 mx-auto col-lg-10 pt-3 px-4">
-          <div class="container rounded bg-dark p-md-4">
+<main role="main" class="col-md-10 mx-auto pt-3 px-4">
+          <div class="card bg-dark rounded bg-dark p-md-4">
             <p class="fs-2 fw-bold text-muted text-center">INFORMATION APPLICATION</p>
             </div>
 
@@ -51,10 +51,10 @@ if (isset($_POST['submit'])) {
                   <p class="fs-3 fw-bold text-uppercase"><?php echo $row['nama'];?> </p>     
                   <p class="fs-5 fw-light text-muted"><?php echo $row['tahun_dibuat'];?> </p>     
                 </div>
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-1">
-                  <div class="btn-toolbar mt-md-2 mb-md-0">
-                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modal-update"><i class="fas fa-edit"></i> Edit</button>
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-2">
+                  <div class="btn-toolbar mt-md-2 mb-md-0 float-lg-end p-md-1">
+                    <button class="btn btn-lg btn-dark" data-bs-toggle="modal" data-bs-target="#modal-update"><i class="fas fa-edit"></i> Edit</button>
                   </div>
                 </div>
             </div>
