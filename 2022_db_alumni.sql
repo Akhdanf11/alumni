@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 05, 2023 at 09:48 AM
--- Server version: 5.7.36
--- PHP Version: 7.4.26
+-- Host: localhost
+-- Generation Time: Jan 08, 2023 at 06:46 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,13 +27,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `ec_cities`
 --
 
-DROP TABLE IF EXISTS `ec_cities`;
-CREATE TABLE IF NOT EXISTS `ec_cities` (
-  `city_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ec_cities` (
+  `city_id` int(11) NOT NULL,
   `city_name` varchar(255) DEFAULT NULL,
-  `prov_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`city_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=476 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  `prov_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `ec_cities`
@@ -522,9 +520,8 @@ INSERT INTO `ec_cities` (`city_id`, `city_name`, `prov_id`) VALUES
 -- Table structure for table `ec_datalumni`
 --
 
-DROP TABLE IF EXISTS `ec_datalumni`;
-CREATE TABLE IF NOT EXISTS `ec_datalumni` (
-  `data_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ec_datalumni` (
+  `data_id` int(11) UNSIGNED NOT NULL,
   `subdis_id` int(11) NOT NULL,
   `dis_id` int(11) NOT NULL,
   `city_id` int(11) NOT NULL,
@@ -532,9 +529,8 @@ CREATE TABLE IF NOT EXISTS `ec_datalumni` (
   `id_perusahaan` int(11) NOT NULL,
   `id_skill` int(11) NOT NULL,
   `id_contact` int(11) NOT NULL,
-  `data_nama` varchar(255) NOT NULL,
-  PRIMARY KEY (`data_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `data_nama` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -542,13 +538,11 @@ CREATE TABLE IF NOT EXISTS `ec_datalumni` (
 -- Table structure for table `ec_districts`
 --
 
-DROP TABLE IF EXISTS `ec_districts`;
-CREATE TABLE IF NOT EXISTS `ec_districts` (
-  `dis_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ec_districts` (
+  `dis_id` int(11) NOT NULL,
   `dis_name` varchar(255) DEFAULT NULL,
-  `city_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`dis_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=6995 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  `city_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `ec_districts`
@@ -7559,14 +7553,12 @@ INSERT INTO `ec_districts` (`dis_id`, `dis_name`, `city_id`) VALUES
 -- Table structure for table `ec_provinces`
 --
 
-DROP TABLE IF EXISTS `ec_provinces`;
-CREATE TABLE IF NOT EXISTS `ec_provinces` (
-  `prov_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ec_provinces` (
+  `prov_id` int(11) NOT NULL,
   `prov_name` varchar(255) DEFAULT NULL,
   `locationid` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT '1',
-  PRIMARY KEY (`prov_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  `status` int(11) DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `ec_provinces`
@@ -7614,13 +7606,11 @@ INSERT INTO `ec_provinces` (`prov_id`, `prov_name`, `locationid`, `status`) VALU
 -- Table structure for table `ec_subdistricts`
 --
 
-DROP TABLE IF EXISTS `ec_subdistricts`;
-CREATE TABLE IF NOT EXISTS `ec_subdistricts` (
-  `subdis_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ec_subdistricts` (
+  `subdis_id` int(11) NOT NULL,
   `subdis_name` varchar(255) DEFAULT NULL,
-  `dis_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`subdis_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=81226 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  `dis_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `ec_subdistricts`
@@ -59608,13 +59598,11 @@ INSERT INTO `ec_subdistricts` (`subdis_id`, `subdis_name`, `dis_id`) VALUES
 -- Table structure for table `tb_aplikasi`
 --
 
-DROP TABLE IF EXISTS `tb_aplikasi`;
-CREATE TABLE IF NOT EXISTS `tb_aplikasi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_aplikasi` (
+  `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `tahun_dibuat` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `tahun_dibuat` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_aplikasi`
@@ -59629,12 +59617,18 @@ INSERT INTO `tb_aplikasi` (`id`, `nama`, `tahun_dibuat`) VALUES
 -- Table structure for table `tb_contact`
 --
 
-DROP TABLE IF EXISTS `tb_contact`;
-CREATE TABLE IF NOT EXISTS `tb_contact` (
+CREATE TABLE `tb_contact` (
   `id_contact` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `no_telp` int(11) NOT NULL
+  `no_telp` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_contact`
+--
+
+INSERT INTO `tb_contact` (`id_contact`, `email`, `no_telp`) VALUES
+(14, 'melvinjovano2@gmail.com', 'asdasdasd');
 
 -- --------------------------------------------------------
 
@@ -59642,14 +59636,12 @@ CREATE TABLE IF NOT EXISTS `tb_contact` (
 -- Table structure for table `tb_perusahaan`
 --
 
-DROP TABLE IF EXISTS `tb_perusahaan`;
-CREATE TABLE IF NOT EXISTS `tb_perusahaan` (
-  `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_perusahaan` (
+  `id_perusahaan` int(11) NOT NULL,
   `id_skill` int(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `jenis_perusahaan` enum('swasta','negeri') NOT NULL,
-  PRIMARY KEY (`id_perusahaan`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `jenis_perusahaan` enum('swasta','negeri') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_perusahaan`
@@ -59666,12 +59658,10 @@ INSERT INTO `tb_perusahaan` (`id_perusahaan`, `id_skill`, `nama`, `jenis_perusah
 -- Table structure for table `tb_skill`
 --
 
-DROP TABLE IF EXISTS `tb_skill`;
-CREATE TABLE IF NOT EXISTS `tb_skill` (
-  `id_skill` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_skill` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_skill`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_skill` (
+  `id_skill` int(11) NOT NULL,
+  `nama_skill` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_skill`
@@ -59690,15 +59680,13 @@ INSERT INTO `tb_skill` (`id_skill`, `nama_skill`) VALUES
 -- Table structure for table `tb_users`
 --
 
-DROP TABLE IF EXISTS `tb_users`;
-CREATE TABLE IF NOT EXISTS `tb_users` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_users` (
+  `id` int(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role_user` enum('Pegawai','Admin') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `role_user` enum('Pegawai','Admin') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_users`
@@ -59708,6 +59696,134 @@ INSERT INTO `tb_users` (`id`, `username`, `email`, `password`, `role_user`) VALU
 (1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin'),
 (2, 'Akhdan Fadhilah', 'akhdan@gmail.com', 'c0072b7eb4ee6344e87b5c11f438c8e6', 'Pegawai'),
 (3, 'triojago', 'triojagooo@gmail.com', '7fa7edeb5c412d52897dc8d7d8f2e28b', 'Admin');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ec_cities`
+--
+ALTER TABLE `ec_cities`
+  ADD PRIMARY KEY (`city_id`) USING BTREE;
+
+--
+-- Indexes for table `ec_datalumni`
+--
+ALTER TABLE `ec_datalumni`
+  ADD PRIMARY KEY (`data_id`);
+
+--
+-- Indexes for table `ec_districts`
+--
+ALTER TABLE `ec_districts`
+  ADD PRIMARY KEY (`dis_id`) USING BTREE;
+
+--
+-- Indexes for table `ec_provinces`
+--
+ALTER TABLE `ec_provinces`
+  ADD PRIMARY KEY (`prov_id`) USING BTREE;
+
+--
+-- Indexes for table `ec_subdistricts`
+--
+ALTER TABLE `ec_subdistricts`
+  ADD PRIMARY KEY (`subdis_id`) USING BTREE;
+
+--
+-- Indexes for table `tb_aplikasi`
+--
+ALTER TABLE `tb_aplikasi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_contact`
+--
+ALTER TABLE `tb_contact`
+  ADD PRIMARY KEY (`id_contact`);
+
+--
+-- Indexes for table `tb_perusahaan`
+--
+ALTER TABLE `tb_perusahaan`
+  ADD PRIMARY KEY (`id_perusahaan`);
+
+--
+-- Indexes for table `tb_skill`
+--
+ALTER TABLE `tb_skill`
+  ADD PRIMARY KEY (`id_skill`);
+
+--
+-- Indexes for table `tb_users`
+--
+ALTER TABLE `tb_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `ec_cities`
+--
+ALTER TABLE `ec_cities`
+  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
+
+--
+-- AUTO_INCREMENT for table `ec_datalumni`
+--
+ALTER TABLE `ec_datalumni`
+  MODIFY `data_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `ec_districts`
+--
+ALTER TABLE `ec_districts`
+  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6995;
+
+--
+-- AUTO_INCREMENT for table `ec_provinces`
+--
+ALTER TABLE `ec_provinces`
+  MODIFY `prov_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `ec_subdistricts`
+--
+ALTER TABLE `ec_subdistricts`
+  MODIFY `subdis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81226;
+
+--
+-- AUTO_INCREMENT for table `tb_aplikasi`
+--
+ALTER TABLE `tb_aplikasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_contact`
+--
+ALTER TABLE `tb_contact`
+  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `tb_perusahaan`
+--
+ALTER TABLE `tb_perusahaan`
+  MODIFY `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tb_skill`
+--
+ALTER TABLE `tb_skill`
+  MODIFY `id_skill` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tb_users`
+--
+ALTER TABLE `tb_users`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

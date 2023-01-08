@@ -84,8 +84,21 @@
 			$city = $_POST['city'];
 			$prov = $_POST['prov'];
 			$nama = $_POST['nama'];
+			$skill = $_POST['skill'];
+			$perusahaan = $_POST['perusahaan'];
+			$contact = $_POST['contact'];
 
-			$insertData = mysqli_query($connection, "INSERT INTO `ec_datalumni` (`data_id`, `subdis_id`, `dis_id`, `city_id`, `prov_id`, `data_nama`) VALUES (NULL, '$subdis', '$dis', '$city', '$prov', '$nama');") or die ('Query Gagal');
+			$insertData = mysqli_query($connection, "INSERT INTO `ec_datalumni` (`data_id`, `subdis_id`, `dis_id`, `city_id`, `prov_id`, `id_perusahaan`, `id_skill`, `id_contact`, `data_nama`) VALUES (NULL, $subdis, $dis, $city, $prov, $perusahaan, $skill, $contact, '$nama');") or die ('Query Gagal');
+			exit;
+		break;
+
+		case 'insertcontact':
+			$email = $_POST['email'];
+			$noTelp = $_POST['noTelp'];
+
+			$insertData = mysqli_query($connection, "INSERT INTO `tb_contact` (`id_contact`, `email`, `no_telp`) VALUES (NULL, '$email', '$noTelp');") or die ('Query Gagal');
+
+			echo mysqli_insert_id($connection);
 			exit;
 		break;
 

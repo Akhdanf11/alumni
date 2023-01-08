@@ -1,5 +1,5 @@
 <?php 
-include '../connection.php';
+  include '../connection.php';
 ?>
 
 <div class="content-wrapper">
@@ -27,7 +27,7 @@ include '../connection.php';
                   <th>Desa</th>
                   <?php 
                     if ($_SESSION['role_user'] == 'Admin'){
-                    ?>
+                  ?>
                   <th>Aksi</th>
                   <?php
                     }
@@ -229,15 +229,12 @@ include '../connection.php';
             </table>
           </div> 
         </div>
-
       </div>
     </div>
   </div>
 </section><!-- /.content -->
 </div>
                 
-
-
 <script refer>
   $('#provinsi').select2({
       placeholder: 'Pilih Provinsi',
@@ -331,24 +328,46 @@ include '../connection.php';
       var prov = $("#provinsi").val();
       var dis = $("#kecamatan").val();
       var nama = $("#data-alumni").val();
+      var noTelp = $("#no_telp").val();
+      var skill = $("#id_skill").val();
+      var perusahaan = $("#id_perusahaan").val();
+      var email = $("#email").val();
 
+      console.log(noTelp, email);
       $.ajax({
           type: "POST",
           dataType: "html",
-          url: "../../backend/api.php?jenis=insert",
+          url: "../../backend/api.php?jenis=insertcontact",
           data: {
-            subdis,
-            city,
-            prov,
-            nama,
-            dis
+            noTelp,
+            email,
           },
           success: function(msg){
-            console.log(msg, city, subdis, prov, dis);
             $("img#load2").hide();
-            location.reload();
+            console.log(msg);
+            $.ajax({
+                type: "POST",
+                dataType: "html",
+                url: "../../backend/api.php?jenis=insert",
+                data: {
+                  subdis,
+                  city,
+                  skill,
+                  perusahaan,
+                  contact: msg,
+                  prov,
+                  nama,
+                  dis
+                },
+                success: function(msg){
+                  $("img#load2").hide();
+                  location.reload();
+                }
+            });
           }
       });
+
+      
     } catch (error) {
       console.log(error);
     }
